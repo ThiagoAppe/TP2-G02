@@ -1,1 +1,5 @@
+.env
+
 venv_tp2/*
+
+__pycache__/

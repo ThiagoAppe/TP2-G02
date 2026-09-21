@@ -1,0 +1,180 @@
+{
+    "actor": [
+        "actor_id",
+        "nombre",
+        "apellido",
+        "ultima_actualizacion"
+    ],
+    "alquiler": [
+        "alquiler_id",
+        "fecha_alquiler",
+        "inventario_id",
+        "cliente_id",
+        "fecha_devolucion",
+        "empleado_id",
+        "ultima_actualizacion"
+    ],
+    "categoria": [
+        "categoria_id",
+        "nombre",
+        "ultima_actualizacion"
+    ],
+    "ciudad": [
+        "ciudad_id",
+        "ciudad",
+        "pais_id",
+        "ultima_actualizacion"
+    ],
+    "cliente": [
+        "cliente_id",
+        "tienda_id",
+        "nombre",
+        "apellido",
+        "email",
+        "direccion_id",
+        "activo",
+        "fecha_creacion",
+        "ultima_actualizacion"
+    ],
+    "direccion": [
+        "direccion_id",
+        "direccion",
+        "direccion_secundaria",
+        "distrito",
+        "ciudad_id",
+        "codigo_postal",
+        "telefono",
+        "ubicacion",
+        "ultima_actualizacion"
+    ],
+    "empleado": [
+        "empleado_id",
+        "nombre",
+        "apellido",
+        "direccion_id",
+        "fotografia",
+        "correo_electronico",
+        "tienda_id",
+        "activo",
+        "nombre_usuario",
+        "contrasena",
+        "ultima_actualizacion"
+    ],
+    "idioma": [
+        "idioma_id",
+        "nombre",
+        "ultima_actualizacion"
+    ],
+    "informacion_actores": [
+        "actor_id",
+        "nombre",
+        "apellido",
+        "informacion_peliculas"
+    ],
+    "inventario": [
+        "inventario_id",
+        "pelicula_id",
+        "tienda_id",
+        "ultima_actualizacion"
+    ],
+    "lista_clientes": [
+        "id",
+        "nombre",
+        "direccion",
+        "codigo_postal",
+        "telefono",
+        "ciudad",
+        "pais",
+        "observaciones",
+        "tienda_id"
+    ],
+    "lista_empleados": [
+        "id",
+        "nombre",
+        "direccion",
+        "codigo_postal",
+        "telefono",
+        "ciudad",
+        "pais",
+        "tienda_id"
+    ],
+    "lista_peliculas": [
+        "id",
+        "titulo",
+        "descripcion",
+        "categoria",
+        "precio",
+        "duracion",
+        "clasificacion",
+        "actores"
+    ],
+    "lista_peliculas_detallada": [
+        "id",
+        "titulo",
+        "descripcion",
+        "categoria",
+        "precio",
+        "duracion",
+        "clasificacion",
+        "actores"
+    ],
+    "pago": [
+        "pago_id",
+        "cliente_id",
+        "empleado_id",
+        "alquiler_id",
+        "importe",
+        "fecha_pago",
+        "ultima_actualizacion"
+    ],
+    "pais": [
+        "pais_id",
+        "pais",
+        "ultima_actualizacion"
+    ],
+    "pelicula": [
+        "pelicula_id",
+        "titulo",
+        "descripcion",
+        "anio_estreno",
+        "idioma_id",
+        "idioma_original_id",
+        "duracion_alquiler",
+        "tarifa_alquiler",
+        "duracion",
+        "costo_reposicion",
+        "clasificacion",
+        "caracteristicas_especiales",
+        "ultima_actualizacion"
+    ],
+    "pelicula_actor": [
+        "actor_id",
+        "pelicula_id",
+        "ultima_actualizacion"
+    ],
+    "pelicula_categoria": [
+        "pelicula_id",
+        "categoria_id",
+        "ultima_actualizacion"
+    ],
+    "pelicula_texto": [
+        "pelicula_id",
+        "titulo",
+        "descripcion"
+    ],
+    "tienda": [
+        "tienda_id",
+        "gerente_empleado_id",
+        "direccion_id",
+        "ultima_actualizacion"
+    ],
+    "ventas_por_categoria_pelicula": [
+        "categoria",
+        "ventas_totales"
+    ],
+    "ventas_por_tienda": [
+        "tienda",
+        "gerente",
+        "ventas_totales"
+    ]
+}
