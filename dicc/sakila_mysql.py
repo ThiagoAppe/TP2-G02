@@ -3,6 +3,8 @@ import os
 import mysql.connector
 from dotenv import load_dotenv
 
+import json
+
 
 load_dotenv()
 
@@ -15,10 +17,6 @@ def get_mysql_connection():
         user=os.getenv("MYSQL_USER"),
         password=os.getenv("MYSQL_PASSWORD"),
     )
-    
-    
-import json
-
 
 def save_database_schema():
     connection = get_mysql_connection()

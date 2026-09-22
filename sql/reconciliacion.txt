@@ -1,0 +1,27 @@
+RECONCILIACIÓN MYSQL -> SQL SERVER
+
+Tabla                      | Filas origen | Filas SQL Server | Diferencia
+-------------------------------------------------------------------------
+actor                      |          200 |              200 |          0
+actor_info                 |          200 |              200 |          0
+address                    |          603 |              603 |          0
+category                   |           16 |               16 |          0
+city                       |          600 |              600 |          0
+country                    |          109 |              109 |          0
+customer                   |          599 |              599 |          0
+customer_list              |          599 |              599 |          0
+film                       |         1000 |             1000 |          0
+film_actor                 |         5462 |             5462 |          0
+film_category              |         1000 |             1000 |          0
+film_list                  |         1000 |             1000 |          0
+film_text                  |         1000 |             1000 |          0
+inventory                  |         4581 |             4581 |          0
+language                   |            6 |                6 |          0
+nicer_but_slower_film_list |         1000 |             1000 |          0
+payment                    |        16044 |            16044 |          0
+rental                     |        16044 |            16044 |          0
+sales_by_film_category     |           16 |               16 |          0
+sales_by_store             |            2 |                2 |          0
+staff                      |            2 |                2 |          0
+staff_list                 |            2 |                2 |          0
+store                      |            2 |                2 |          0
