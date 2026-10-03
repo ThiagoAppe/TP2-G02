@@ -1,20 +1,24 @@
 import os
 
-import pyodbc
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.engine import URL
 
 
 load_dotenv()
 
 
-def get_connection():
-    connection_string = (
-        "DRIVER={ODBC Driver 18 for SQL Server};"
-        f"SERVER={os.getenv('DB_SERVER')};"
-        f"DATABASE={os.getenv('DB_NAME')};"
-        f"UID={os.getenv('DB_USER')};"
-        f"PWD={os.getenv('DB_PASSWORD')};"
-        "TrustServerCertificate=yes;"
+def get_engine():
+    connection_url = URL.create(
+        "mssql+pyodbc",
+        username=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        host=os.getenv("DB_SERVER"),
+        database=os.getenv("DB_NAME"),
+        query={
+            "driver": "ODBC Driver 18 for SQL Server",
+            "TrustServerCertificate": "yes",
+        },
     )
 
-    return pyodbc.connect(connection_string)
+    return create_engine(connection_url)
