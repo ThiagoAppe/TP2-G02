@@ -14,10 +14,4 @@
 ## Actividad 1
 
 - `notebooks/analisis.ipynb`: análisis reproducible de rotación de inventario.
-- `sql/actividad_1/`: consultas del conjunto de trabajo, métricas, controles de
-  calidad y creación de la tabla destino ETL.
-- `graficos/actividad_1/`: gráficos generados por el notebook.
-- `informe/actividad_1/`: consigna y material escrito de la actividad.
-
-`informe/anexo_ia.md` se conserva fuera de las actividades porque es material
-general del proyecto.
+- `sql/actividad_1/`: consulta del conjunto de trabajo y consulta de métricas.
