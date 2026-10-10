@@ -1,4 +1,11 @@
-from config_conexion import get_connection
+import sys
+from pathlib import Path
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from config_conexion import get_engine
 from dicc.sakila_mysql import get_mysql_connection
 from esquema import SCHEMA
 
@@ -26,7 +33,8 @@ def count_sql_server_rows(connection, table_name):
 
 def reconcile_databases():
     mysql_connection = get_mysql_connection()
-    sql_server_connection = get_connection()
+    sql_server_engine = get_engine()
+    sql_server_connection = sql_server_engine.raw_connection()
 
     results = []
 
@@ -57,6 +65,7 @@ def reconcile_databases():
     finally:
         mysql_connection.close()
         sql_server_connection.close()
+        sql_server_engine.dispose()
 
     return results
 
