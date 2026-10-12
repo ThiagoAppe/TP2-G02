@@ -15,10 +15,11 @@ tp2/
 │       ├── conjunto_trabajo.sql     # Datos crudos para el análisis
 │       └── metricas_rotacion.sql    # Métricas agregadas en T-SQL
 ├── notebooks/
-│   └── analisis.ipynb               # Actividades 1 y 2, ejecutado con salidas
+│   └── analisis.ipynb               # Actividades 1, 2 y 3, ejecutado con salidas
 ├── informe/
 │   ├── diagnostico_calidad.md       # Entregable de la Actividad 2
 │   └── diagnostico_calidad.pdf      # Versión PDF del diagnóstico
+├── graficos/                        # PNG de la Actividad 3
 └── requirements.txt                 # Dependencias del entorno virtual
 ```
 
@@ -55,6 +56,9 @@ Entregables:
 - `informe/diagnostico_calidad.pdf`
 - Secciones 13 a 16 de `notebooks/analisis.ipynb`
 
+## Actividad 3 — Análisis y visualización narrativa
+
+El notebook construye vistas de copias y alquileres. La evidencia no justifica redistribuir stock entre tiendas sólo por la rotación: sus medias son 3,50 y 3,52 alquileres por copia.
 
 ## Configuración local (ENV)
 
