@@ -1,3 +1,10 @@
+/*
+Calcula las métricas de la variante íntegramente en SQL Server.
+
+LAG obtiene la devolución del alquiler anterior de cada copia, ordenada por
+fecha de alquiler. Luego se calcula la ociosidad entre alquileres consecutivos
+y se agregan las métricas por película y tienda.
+*/
 WITH alquileres_con_anterior AS (
     SELECT
         i.inventario_id AS id,
@@ -20,6 +27,7 @@ ociosidad AS (
         DATEDIFF(DAY, devolucion_anterior, fecha) AS dias_ociosidad
     FROM alquileres_con_anterior
 )
+-- COUNT(DISTINCT id) evita contar una misma copia una vez por cada alquiler.
 SELECT
     pelicula,
     tienda,
