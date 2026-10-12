@@ -1,14 +1,12 @@
 import sys
 from pathlib import Path
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from config_conexion import get_engine
 from dicc.sakila_mysql import get_mysql_connection
 from esquema import SCHEMA
-
 
 OUTPUT_FILE = "reconciliacion.txt"
 
