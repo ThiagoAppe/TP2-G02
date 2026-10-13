@@ -1,0 +1,59 @@
+Actividad 4 — Evidencia de idempotencia
+=========================================
+
+Fecha de verificación: 2026-10-12
+Directorio de ejecución: raíz del repositorio tp2
+Archivo de log generado: pipeline/logs/pipeline_tp2.log
+
+El archivo de log no se versiona porque se genera en cada ejecución. Esta
+evidencia conserva los comandos, los conteos y los resultados relevantes,
+sin incluir credenciales.
+
+Ejecución 1
+---------
+Comando:
+    venv_tp2/bin/python pipeline/pipeline_tp2.py --log-level INFO
+
+Resultado relevante del log:
+    Extracción SQL: 16.045 filas, 4.581 copias y 16.044 alquileres.
+    Transformación: 1.521 combinaciones película–tienda y 11.464 intervalos medibles.
+    Carga confirmada: 1.521 filas.
+    Fin exitoso del pipeline.
+
+Consulta ejecutada inmediatamente después:
+    sql/actividad_4/verificar_idempotencia.sql
+
+Resultado:
+    filas_destino=1521; claves_pelicula_tienda=1521
+
+Ejecución 2
+---------
+Comando:
+    venv_tp2/bin/python pipeline/pipeline_tp2.py --log-level INFO
+
+Resultado relevante del log:
+    Extracción SQL: 16.045 filas, 4.581 copias y 16.044 alquileres.
+    Transformación: 1.521 combinaciones película–tienda y 11.464 intervalos medibles.
+    Carga confirmada: 1.521 filas.
+    Fin exitoso del pipeline.
+
+Consulta ejecutada inmediatamente después:
+    sql/actividad_4/verificar_idempotencia.sql
+
+Resultado:
+    filas_destino=1521; claves_pelicula_tienda=1521
+
+Conclusión
+----------
+
+Los dos conteos son idénticos entre las dos ejecuciónes. Además, en ambos casos
+el número total de filas coincide con el de claves película–tienda, por lo que
+la segunda ejecución reemplazó el snapshot en lugar de duplicarlo.
+
+Prueba adicional de errores
+---------------------------
+
+Se ejecutó el pipeline con una ruta de CSV inexistente. La orquestación
+registró `logger.exception`, volvió a lanzar `FileNotFoundError` y finalizó
+con error antes de transformar o cargar. Una consulta posterior confirmó que
+la tabla destino se preservó con 1.521 filas y 1.521 claves únicas.

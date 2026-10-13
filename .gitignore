@@ -10,3 +10,4 @@ commits.txt
 commits_moodle.html
 ideas.md
 WIP.md
+pipeline/logs/*.log
