@@ -19,7 +19,12 @@ tp2/
 ├── informe/
 │   ├── diagnostico_calidad.md       # Entregable de la Actividad 2
 │   └── diagnostico_calidad.pdf      # Versión PDF del diagnóstico
-├── graficos/                        # PNG de la Actividad 3
+│   ├── informe.md                   # Informe final de la Actividad 5
+├── graficos/                        # PNG a 150 dpi de la Actividad 3
+├── pipeline/
+│   ├── pipeline_tp2.py              # ETL CLI idempotente de la Actividad 4
+│   ├── datos/metas_rotacion_tienda.csv
+│   └── evidencias/actividad_4_doble_ejecucion.txt
 └── requirements.txt                 # Dependencias del entorno virtual
 ```
 
@@ -60,16 +65,65 @@ Entregables:
 
 El notebook construye vistas de copias y alquileres. La evidencia no justifica redistribuir stock entre tiendas sólo por la rotación: sus medias son 3,50 y 3,52 alquileres por copia.
 
-## Configuración local (ENV)
+Entregables:
 
-DB_SERVER=
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
+- `notebooks/analisis.ipynb`
+- `graficos/01_rotacion_extremos_por_tienda.png`
+- `graficos/02_ocio_por_tienda.png`
+- `graficos/03_copias_vs_alquileres.png`
 
+## Actividad 4 — Pipeline ETL reproducible
 
-MYSQL_HOST=
-MYSQL_DATABASE=
-MYSQL_USER=
-MYSQL_PASSWORD=
-MYSQL_PORT=
+El script extrae inventario, películas y alquileres desde SQL Server, valida y combina las metas operativas del CSV, calcula la rotación y la ociosidad en forma vectorizada y reemplaza el snapshot `dbo.TP2_RotacionInventario` dentro de una transacción. La clave primaria `(pelicula_id, tienda_id)` y el reemplazo transaccional hacen idempotente la carga.
+
+La evidencia de dos ejecuciones consecutivas está en `pipeline/evidencias/actividad_4_doble_ejecucion.txt`: ambas dejaron 1.521 filas y 1.521 claves únicas.
+
+## Actividad 5 — Informe de conclusiones
+
+El informe final está en `informe/informe.md`. Incluye la pregunta de negocio, el abordaje, decisiones de diseño, síntesis de calidad, los tres gráficos, hallazgos, limitaciones y dificultades. Markdown es uno de los formatos de entrega permitidos; si se genera un PDF, debe derivarse de esta fuente y conservar exactamente el mismo contenido, con un máximo de seis páginas.
+
+El registro disponible de uso de IA se mantiene separado en `informe/anexo_ia.md` y sólo documenta interacciones verificables.
+
+## Instalación y configuración local
+
+Usar Python 3.12 o compatible y un entorno virtual del proyecto:
+
+```bash
+python3 -m venv venv_tp2
+venv_tp2/bin/pip install -r requirements.txt
+```
+
+Definir las credenciales de SQL Server fuera del código, mediante variables de entorno o un archivo `.env` local no versionado:
+
+```bash
+export DB_SERVER='servidor'
+export DB_NAME='base_de_datos'
+export DB_USER='usuario'
+export DB_PASSWORD='contrasena'
+```
+
+`config_conexion.py` lee esas cuatro variables y crea el engine `mssql+pyodbc` con ODBC Driver 18 for SQL Server. Las variables `MYSQL_*` sólo son necesarias para repetir la reconciliación de la Actividad 0 y se definen de forma análoga:
+
+```bash
+export MYSQL_HOST='servidor_mysql'
+export MYSQL_DATABASE='sakila'
+export MYSQL_USER='usuario_mysql'
+export MYSQL_PASSWORD='contrasena_mysql'
+export MYSQL_PORT='3306'
+```
+
+## Ejecutar y verificar el pipeline
+
+Desde la raíz del repositorio, con las cuatro variables `DB_*` definidas:
+
+```bash
+venv_tp2/bin/python pipeline/pipeline_tp2.py --log-level INFO
+```
+
+El CSV de metas predeterminado es `pipeline/datos/metas_rotacion_tienda.csv`. Para usar otro archivo compatible:
+
+```bash
+venv_tp2/bin/python pipeline/pipeline_tp2.py --metas ruta/al/archivo.csv --log-level INFO
+```
+
+El proceso registra consola y `pipeline/logs/pipeline_tp2.log`. Para demostrar idempotencia, ejecutarlo dos veces seguidas y, después de cada ejecución, ejecutar [`sql/actividad_4/verificar_idempotencia.sql`](sql/actividad_4/verificar_idempotencia.sql). El total de filas debe coincidir con las claves únicas película–tienda y con el conteo informado por el log.
